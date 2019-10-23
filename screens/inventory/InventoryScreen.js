@@ -1,11 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import InventoryItem from '../../components/InventoryItem'
 
+export default function InventoryScreen(props) {
 
-export default function InventoryScreen() {
+    const onPressId = id=>{
+      console.log("Hello",id)
+      props.navigation.navigate('RecommendScreen', {
+        inventoryId: id
+      });
+    }
     return (
       <View style={styles.container}>
-        <Text>InventoryScreen</Text>
+        <InventoryItem onPressId={onPressId}/>
+        <InventoryItem onPressId={onPressId}/>
+        <InventoryItem onPressId={onPressId}/>
+        <InventoryItem onPressId={onPressId}/>
       </View>
     );
   }
@@ -14,8 +24,9 @@ export default function InventoryScreen() {
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems:'center',
+      flexDirection:'column'
+      
     },
   });
   

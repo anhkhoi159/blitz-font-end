@@ -3,14 +3,14 @@ import LoginScreen from '../screens/login/LoginScreen'
 import TabNavigator from './TabNavigator'
 
 const MainStack = createStackNavigator({
-    LoginScreen: {
+  MainScreen :{
+    screen: TabNavigator,
+   
+  },  
+  LoginScreen: {
         screen: LoginScreen,
-        headerMode: 'none',
       },
-    MainScreen :{
-        screen: TabNavigator,
-       
-    }
+    
    },
    {
        headerMode: 'none',
