@@ -11,16 +11,17 @@ import TabBarIcon from '../components/TabBarIcon';
 import { StyleSheet,Platform } from 'react-native';
 //Inventory Tab
 const InvnetoryStack = createStackNavigator({
+  InventoryScreen: {
+    screen: InventoryScreen,
+  //   headerMode: 'none',
+  //  navigationOptions: {
+  //    headerVisible: false,
+  //  }
+  },
     RecommendScreen : {
       screen:RecommendScreen
     },
-    InventoryScreen: {
-        screen: InventoryScreen,
-      //   headerMode: 'none',
-      //  navigationOptions: {
-      //    headerVisible: false,
-      //  }
-      },
+    
      
    }
 )

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+import GradientButton from 'react-native-gradient-buttons';
 
 export default function LoginScreen(props) {
     const MoveToTab =(()=>{
@@ -8,9 +8,19 @@ export default function LoginScreen(props) {
     })
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={MoveToTab}><Text>
-        Login
-      </Text></TouchableOpacity>
+        <TouchableOpacity onPress={MoveToTab}>
+          <View>
+          <GradientButton
+           text="Login" 
+           height={60}
+           width={200}
+           radius={15} 
+           blueMarine 
+           impact
+           textStyle={{ fontSize: 20 }}
+           onPressAction={MoveToTab} />
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
