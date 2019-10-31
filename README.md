@@ -34,6 +34,5 @@ We have 3 things in the image
 * Login your account to your *Expo App* installed on your phone. Then go to *Project Tab* to see your code  
 <img src="https://i.imgur.com/27dYdRZ.png">  
   
-  ##IF YOU DON'T FORGOT LOGIN, YOU CAN JUST SCAN QR CODE THEN RUN
-  
-<img src="https://giphy.com/gifs/W08xRIvzm7WzdDdlnS"> 
+##IF YOU DON'T FORGOT LOGIN, YOU CAN JUST SCAN QR CODE THEN RUN  
+<a href="{https://giphy.com/gifs/W08xRIvzm7WzdDdlnS}" title="Expo">
