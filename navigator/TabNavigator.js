@@ -5,25 +5,30 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 // import { createBottomTabNavigator } from 'react-navigation-tabs'
 import InventoryScreen from '../screens/inventory/InventoryScreen'
 import RecommendScreen from '../screens/inventory/RecommendScreen'
+import ConfirmScreen from '../screens/inventory/ConfirmScreen'
 import ResultScreen from '../screens/result/ResultScreen'
 import AccountScreen from '../screens/account/AccountScreen'
+
 import TabBarIcon from '../components/TabBarIcon';
 import { StyleSheet,Platform } from 'react-native';
 //Inventory Tab
 const InvnetoryStack = createStackNavigator({
-  InventoryScreen: {
-    screen: InventoryScreen,
-  //   headerMode: 'none',
-  //  navigationOptions: {
-  //    headerVisible: false,
-  //  }
-  },
+    InventoryScreen: {
+      screen: InventoryScreen,  
+    },
     RecommendScreen : {
       screen:RecommendScreen
     },
-    
-     
-   }
+    ConfirmScreen:{
+      screen:ConfirmScreen
+    }  
+  },
+  {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+  }
 )
 InvnetoryStack.navigationOptions = {
   tabBarLabel: 'Inventory',

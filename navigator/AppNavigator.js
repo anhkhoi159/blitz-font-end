@@ -10,6 +10,8 @@ const MainStack = createStackNavigator({
     screen: TabNavigator,
    
   },  
+ 
+  
   
     
    },

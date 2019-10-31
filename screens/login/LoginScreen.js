@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import GradientButton from 'react-native-gradient-buttons';
+import { NavigationActions } from 'react-navigation';
 
 export default function LoginScreen(props) {
     const MoveToTab =(()=>{
-      props.navigation.navigate('MainScreen');
+      props.navigation.navigate('InventoryScreen');
+      // props.navigation.navigate('MainScreen', {}, NavigationActions.navigate({ routeName: 'InventoryScreen' }))
     })
     return (
       <View style={styles.container}>

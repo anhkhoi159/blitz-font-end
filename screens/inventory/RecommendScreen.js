@@ -1,110 +1,161 @@
-import React from 'react';
-import { StyleSheet, Text, View,Image,TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  Image,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions 
+ } from 'react-native';
 import MyDatePicker from '../../components/MyDayPicker'
+import { Input } from 'react-native-elements'
+import GradientButton from 'react-native-gradient-buttons';
+
+const DateRCMInput = props => (
+  <View style={styles.inputContainer}>
+    <View style={styles.inputAround}>
+        <Text style={styles.labelInput}>{props.title}:</Text>
+        <Text style={styles.input}/>
+        <MyDatePicker ></MyDatePicker>
+    </View>
+  </View>
+)
+const TextRCMInput = props => (
+  <View style={styles.inputContainer}>
+    <View style={styles.inputAround}>
+        <Text style={styles.labelInput}>{props.title}:</Text>
+        <TextInput 
+        style={styles.input}
+        keyboardType = {'numeric'}
+        placeholder={'5000'} 
+        placeholderTextColor="black" />
+    </View>
+  </View>
+)
+
 
 export default function RecommendScreen(props) {
-  // const { id } =props.navigation.state.params.inventoryId
-  // console.log("Recommend Id: ",id)
+  const [myDate, setMyDate] = useState(new Date());
+
+  const MoveToTab =(()=>{
+    console.log('Clickkkkk')
+    props.navigation.navigate('ConfirmScreen');
+  })
+
+  const StartButton = props =>(
+ 
+    <View style={{width:'100%', alignItems:'center', marginTop:10 }}>
+    <GradientButton
+     text="Start" 
+     height={60}
+     width={'90%'}
+     radius={15} 
+     deepBlue 
+     impact
+     textStyle={{ fontSize: 20 }}
+     onPressAction={MoveToTab}  />
+    </View>
+  
+  )
     return (
-      <View style={styles.container}>
-            <View style={styles.containerProduct}>
-              <Image  style={styles.imageProduct} source={require('../../assets/icon.png')}/>
-              <View style={styles.infoItem}>
+      <KeyboardAvoidingView
+            enabled
+            behavior="padding">
+        <ScrollView >
+
+          <View style={styles.container}>
+                {/* <Image  style={styles.imageProduct} source={require('../../assets/5.jpg')}/> */}
+                <Image  style={styles.imageProduct} source={{uri:'https://cdn.tgdd.vn/Products/Images/42/191483/iphone-xr-128gb-red-400x400.jpg'}}/>
                 <Text style={styles.titleTextItem}>Title of inventory</Text>
-                <View style={styles.dateContainer}>
-                  <Text style={{fontSize:16}}>Amout: </Text>
-                  <TextInput keyboardType={'numeric'} textAlign={'center'} style={styles.inputPromoTime} />
+                <View style={styles.textInfoAround}>
+                  <Text style={{fontSize:18, fontWeight:'bold',marginRight:20}}>Price: 2000.000 VND</Text>
+                  <Text style={{fontSize:16, flex:1}}>Count: 200 </Text>
                 </View>
-                <View style={styles.dateContainer}>
-                  <Text style={{fontSize:16}}>Promo date: </Text>
-                  <TextInput maxLength={2} textAlign={'center'} keyboardType={'numeric'} style={styles.inputPromoTime} />
-                  <Text style={{fontSize:16,}}>day</Text>
-                </View>
-                
-              </View>
+                <Text style={styles.titleFrom}>Flash sale</Text>
+
+                <TextRCMInput title='Count'/>
+                <DateRCMInput title='Promo time'/>
+                <DateRCMInput title='Start'/>
+                <DateRCMInput title='End'/>
+                <TextRCMInput title='Price'/>
+                <StartButton/>
             </View>
-            <View style={styles.dateContainer}>
-                  <Text style={styles.contentTextItem}>Start date: </Text>
-                  <MyDatePicker/>
-            </View>
-            <View style={styles.dateContainer}>
-              <Text style={styles.contentTextItem}>End date: </Text>
-              <MyDatePicker/>
-            </View>
-            <View style={styles.dateContainer}>
-              <Text style={styles.contentTextItem}>Price: </Text>
-              <TextInput
-                maxLength={9} 
-                textAlign={'center'} 
-                keyboardType={'numeric'} 
-                style={[styles.input,{width:100}]}
-                underlineColorAndroid = "transparent"
-                placeholder = "VND" />
-              {/* <Text style={styles.contentTextItem}>VND</Text> */}
-            </View> 
-        </View>
+
+          </ScrollView>
+        </KeyboardAvoidingView>
     );
   }
   
+  const screenWidth = Math.round(Dimensions.get('window').width);
+
   const styles = StyleSheet.create({
+    //main style
     container: {         
       flexDirection:'column',
-      marginTop:15,
-      // backgroundColor:'#f1f1f1'
+      paddingBottom:50
     },
-    containerProduct: {
-      width: '100%',
-      minHeight: 50,     
-      flexDirection:'row',
-      paddingBottom:5
-      
-     
-    },
+  
     imageProduct: {
-     width:100,
-     height:100,
-     marginLeft:15
-     
+     width:"100%",
+     height:screenWidth,
     },
-    infoItem: {
-    flexDirection:'column',
-    marginLeft:18,
-    justifyContent:'center',
-    marginBottom:10
-
-    },
+  
     titleTextItem: {
       fontWeight:'bold',
       color:'blue',
-      fontSize:22,
+      fontSize:26,
       textTransform: 'uppercase',
-      marginBottom:10
+      marginBottom:10,
+      marginTop:20,
+      marginLeft:10
     },
-    contentTextItem: {
-      fontSize:16,
-      width:80,
+    textInfoAround:{
+      flexDirection:'row', 
+      justifyContent:'space-between', 
+      alignItems:'center', 
+      width:'100%',
       marginLeft:15
     },
-    dateContainer: {
+    titleFrom:{
+      color:'red',
+      fontSize:18,
+      fontWeight:'bold',
+      marginLeft:10,
+      marginTop:30
+    },
+
+    //input style
+    inputContainer: {
+      width:"100%",
+      flexDirection:'column',
+      alignItems:'center'
+    },
+    inputAround: {
+      width:"96%",
+      height:50,
+      borderColor:'#e0e0e0',
+      borderWidth:1.2,
+      borderRadius:5,
       flexDirection:'row',
       alignItems:'center',
-      margin:5,
-      borderColor:'grey',
-      borderBottomWidth:1,
-      paddingBottom:1,
+      justifyContent:'space-between',
+      marginTop:5,
+      marginBottom:5
     },
-    inputPromoTime: {
-     
-      width:30,
-      marginLeft:5,
-
-     
+    labelInput: {
+      color:'#B8B8B8',
+      fontWeight:'bold',
+      fontSize:15,
+      marginLeft:15,
+      marginRight:10
     },
     input: {
-      margin: 15,
-      height: 40,
-      borderColor: '#7a42f4',
-      borderWidth: 1
-   },
+      flex:1,
+      textAlign: 'right',
+      marginRight:15 
+    }
   });
   

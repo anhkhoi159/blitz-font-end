@@ -1,55 +1,86 @@
-import React, { Component } from 'react'
+import React, { Component,useState } from 'react'
 import {View, Button, Platform,StyleSheet  } from 'react-native'
 import DatePicker from 'react-native-datepicker'
 
-export default class MyDatePicker extends Component {
-   
-  constructor(props){
-    super(props)
-    this.state = {date:new Date()}
+export default function MyDatePicker(props){
+  const [myDate, setMyDate] = useState(new Date());
+
+  //  const { date } = props
+  //   if(!date){
+  //     date= new Date()
+  //   }
+  const onPressConfirm = date => {
+    setMyDate(date)
   }
- 
-  render(){
     return (
       <DatePicker
- 
-        date={this.state.date}
-        mode="date"
+        style={{width: 165}}
+        date={myDate}
+        mode="datetime"
         placeholder="select date"
-        format="YYYY-MM-DD"
+        format="DD/MM/YYYY HH:mm"
         minDate={new Date()}
-        maxDate="2020-06-01"
+        maxDate="01/01/2022 23:59"
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
-        showIcon={false}
+        is24Hour={false}
         customStyles={{
+          dateIcon: {
+            position: 'relative',
+            left: 0,
+            top:0,
+            marginLeft:0 
+          },
           dateInput: {
-            borderWidth:0,          
+            width:0,
+            borderWidth:0,  
           },
           dateTouchBody:{
-            margin:0,
-            padding:0,
-            height:20,
-            width:80,
-            // backgroundColor:'blue'
-         
-            
-          },
-         
+            width:160
+          }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={onPressConfirm}
       />
+      // <DatePicker
+      //   date={this.state.date}
+      //   mode="date"
+      //   placeholder="select date"
+      //   format="YYYY-MM-DD"
+      //   minDate={new Date()}
+      //   maxDate="2020-06-01"
+      //   confirmBtnText="Confirm"
+      //   cancelBtnText="Cancel"
+      //   showIcon={false}
+      //   customStyles={{
+      //     dateInput: {
+      //       borderWidth:0,          
+      //     },
+      //     dateTouchBody:{
+      //       margin:0,
+      //       padding:0,
+      //       height:20,
+      //       width:80,
+      //     },
+      //     dateIcon: {
+      //       position: 'absolute',
+      //       left: 0,
+      //       top: 4,
+      //       marginLeft: 0,
+      //     },
+         
+      //     // ... You can check the source to find the other keys.
+      //   }}
+      //   onDateChange={(date) => {this.setState({date: date})}}
+      // />
+   
     )
-  }
+  
 }
 
 const styles = StyleSheet.create({
   dateTimePicker: {
-    // width:100,
     height:10,
-    
-    // justifyContent:'flex-start',
     margin:0,
     padding:0,
     paddingBottom:0,

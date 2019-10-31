@@ -7,7 +7,7 @@ export default function InventoryItem(props) {
     
     console.log("inventory ",item.item.name)
     const onPress = ()=>{
-      props.onPressId(1)
+      props.onPressId(item.item.id)
     }
     return (
       <TouchableOpacity onPress={onPress}>
@@ -34,7 +34,8 @@ export default function InventoryItem(props) {
       flexDirection:'row',
       borderBottomWidth:1,
       borderBottomColor:'grey',
-      paddingBottom:5
+      paddingBottom:5,
+      
       
      
     },
