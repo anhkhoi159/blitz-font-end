@@ -1,16 +1,62 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
 import GradientButton from 'react-native-gradient-buttons';
 import { NavigationActions } from 'react-navigation';
+import { WebView } from 'react-native-webview';
 
 export default function LoginScreen(props) {
-    const MoveToTab =(()=>{
-      props.navigation.navigate('InventoryScreen');
-      // props.navigation.navigate('MainScreen', {}, NavigationActions.navigate({ routeName: 'InventoryScreen' }))
-    })
+    const urlLogin = 'http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/'
+   
+    // AsyncStorage.getItem('is_login', (err, result) => {
+    //   console.log("Result ",result)
+    //       if(result==='true'){
+    //         props.navigation.navigate('InventoryScreen');
+    //       }
+    //   }
+    // )
+    
+    const [isLogin,setIsLogin] = useState(false)
+    const [showWvLogin,setShowWvLogin] = useState(false)
+
+  
+
+    onNavigationStateChange =  (navState) => {
+      let successUrl = decodeURIComponent(navState.url)
+      if(successUrl.indexOf(urlLogin+'ok/?token')=== 0){
+        successUrl = (successUrl.replace('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/ok/?token=', '')).replace(/\'/g, '"');
+        
+      
+        console.log("token ",JSON.parse(successUrl).access_token)
+        AsyncStorage.setItem('my_token', JSON.parse(successUrl).access_token, () => {
+          
+        }
+      )
+      AsyncStorage.setItem('is_login', 'true')
+      setShowWvLogin(false)
+      // setIsLogin(true)
+        
+        
+      }
+   }
+   
+   
+  
+
+    if(showWvLogin){
+      console.log("show webview")
+      return(<WebView 
+        source={{ uri: urlLogin+'auth' }} 
+        style={{  marginTop:20}}   
+        onNavigationStateChange={this.onNavigationStateChange}/>)
+    }
+  
+
+    const LoginAction = ()=>{
+        setShowWvLogin(true)
+    }
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={MoveToTab}>
+        <TouchableOpacity onPress={LoginAction}>
           <View>
           <GradientButton
            text="Login" 
@@ -20,7 +66,7 @@ export default function LoginScreen(props) {
            blueMarine 
            impact
            textStyle={{ fontSize: 20 }}
-           onPressAction={MoveToTab} />
+           onPressAction={LoginAction} />
           </View>
         </TouchableOpacity>
       </View>
