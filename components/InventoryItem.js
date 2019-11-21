@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity  } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions   } from 'react-native';
 
 
 export default function InventoryItem(props) {
@@ -10,32 +10,40 @@ export default function InventoryItem(props) {
       props.onPressId(item.item.id)
     }
     return (
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity
+        style={{width:screenWidth,}}
+       onPress={onPress}
+       >
         <View style={styles.inventoryItem}>
             <View style={styles.boderItem}>
-            <Image  style={styles.imageProduct} source={{uri : item.item.uri}}/>
+            <Image  style={styles.imageProduct} source={{uri : item.item.img_src}}/>
             </View>
             <View style={styles.infoInventory}>
-              <Text style={styles.titleInventory}>{item.item.name}</Text>
-              <Text style={styles.contentInventory}>Sold in 2 month: {item.item.soldin2Month}</Text>
-              <Text style={styles.contentInventory}>Count: {item.item.count}</Text>
+              <Text style={styles.titleInventory}>{item.item.title}</Text>
+              <Text style={styles.priceInventory}>Price: {item.item.price} VNĐ</Text>
             </View>
+            <View style={styles.infoQuantityInventory}>
+              <Text style={styles.quantityInventory}>Quantity</Text>
+              <Text style={styles.quantityInventory}>{item.item.inventory_quantity}</Text>
+            </View>
+            
         </View>
       </TouchableOpacity>
     );
   }
-  
+  const screenWidth = Math.round(Dimensions.get('window').width);
+
   const styles = StyleSheet.create({
     inventoryItem: {
       margin: 5,
-      width: '95%',
+      
       minHeight: 50,
       // backgroundColor: 'red',
       flexDirection:'row',
       borderBottomWidth:1,
       borderBottomColor:'grey',
       paddingBottom:5,
-      
+      justifyContent:'space-between'
       
      
     },
@@ -57,20 +65,33 @@ export default function InventoryItem(props) {
      },
     infoInventory: {
     flexDirection:'column',
-    marginLeft:30,
+    marginLeft:20,
     justifyContent:'center',
     marginBottom:10
-
+    },
+    infoQuantityInventory: {
+      flexDirection:'column',
+      marginLeft:20,
+      justifyContent:'center',
+      marginBottom:10,
+      alignItems:'center'
     },
     titleInventory: {
-      fontWeight:'bold',
-      color:'blue',
-      fontSize:22,
+      // fontWeight:'bold',
+      color:'black',
+      fontSize:12,
       textTransform: 'uppercase',
-      marginBottom:10
+      marginBottom:5,
+      maxWidth:200
     },
-    contentInventory: {
+    priceInventory: {
+      fontWeight:'bold',
+      fontSize:16,
+    },
+    quantityInventory: {
+      fontWeight:'bold',
       fontSize:14,
+      color:'#3366FF'
     },
     // imageProduct: {
      

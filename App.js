@@ -4,6 +4,7 @@ import { createAppContainer } from'react-navigation'
 import AppNavigator from './navigator/AppNavigator'
 
 const AppContainer = createAppContainer(AppNavigator)
+
 export default function App() {
   return (
     <AppContainer/>

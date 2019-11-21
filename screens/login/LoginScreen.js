@@ -6,17 +6,17 @@ import { WebView } from 'react-native-webview';
 
 export default function LoginScreen(props) {
     const urlLogin = 'http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/'
-   
-    // AsyncStorage.getItem('is_login', (err, result) => {
-    //   console.log("Result ",result)
-    //       if(result==='true'){
-    //         props.navigation.navigate('InventoryScreen');
-    //       }
-    //   }
-    // )
-    
-    const [isLogin,setIsLogin] = useState(false)
+    AsyncStorage.setItem('is_login', 'false')
+    AsyncStorage.getItem('is_login', (err, result) => {
+      console.log("Result ",result)
+          if(result==='true'){
+            props.navigation.navigate('InventoryScreen');
+          }
+      }
+    )
+     const [isLogin,setIsLogin] = useState(false)
     const [showWvLogin,setShowWvLogin] = useState(false)
+    
 
   
 
@@ -32,7 +32,8 @@ export default function LoginScreen(props) {
         }
       )
       AsyncStorage.setItem('is_login', 'true')
-      setShowWvLogin(false)
+      props.navigation.navigate('InventoryScreen');
+      // setShowWvLogin(false)
       // setIsLogin(true)
         
         
@@ -47,7 +48,9 @@ export default function LoginScreen(props) {
       return(<WebView 
         source={{ uri: urlLogin+'auth' }} 
         style={{  marginTop:20}}   
-        onNavigationStateChange={this.onNavigationStateChange}/>)
+        onNavigationStateChange={this.onNavigationStateChange}
+        incognito={true}
+        />)
     }
   
 
