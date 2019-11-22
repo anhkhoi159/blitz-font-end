@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-export default function ResultScreen() {
+export default function NotifyScreen() {
     return (
       <View style={styles.container}>
         <Text>ResultScreen</Text>

@@ -6,11 +6,14 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import InventoryScreen from '../screens/inventory/InventoryScreen'
 import RecommendScreen from '../screens/inventory/RecommendScreen'
 import ConfirmScreen from '../screens/inventory/ConfirmScreen'
-import ResultScreen from '../screens/result/ResultScreen'
+import NotifyScreen from '../screens/notify/NotifyScreen'
 import AccountScreen from '../screens/account/AccountScreen'
+import OfferScreen from '../screens/offer/OfferScreen'
+import RequestScreen from '../screens/request/RequestScreen'
 
 import TabBarIcon from '../components/TabBarIcon';
 import { StyleSheet,Platform } from 'react-native';
+
 //Inventory Tab
 const InvnetoryStack = createStackNavigator({
     InventoryScreen: {
@@ -44,22 +47,64 @@ InvnetoryStack.navigationOptions = {
   ),
 };
 
-//Result Tab
-const ResultStack = createStackNavigator({
-    ResultScreen: {
-      screen: ResultScreen,
+//Notify Tab
+const NotifyStack = createStackNavigator({
+    NotifyScreen: {
+      screen: NotifyScreen,
     },
  }
 )
-ResultStack.navigationOptions = {
-  tabBarLabel: 'Result',
+NotifyStack.navigationOptions = {
+  tabBarLabel: 'Notify',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? 'ios-settings'
-          : 'md-settings'
+          ? `ios-checkmark-circle${focused ? '' : '-outline'}`
+          : 'md-checkmark-circle'
+      }
+    />
+  ),
+};
+
+//Offer Tab
+const OfferStack = createStackNavigator({
+    OfferScreen: {
+      screen: OfferScreen,
+    },
+ }
+)
+OfferStack.navigationOptions = {
+  tabBarLabel: 'Offer',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-checkmark-circle${focused ? '' : '-outline'}`
+          : 'md-checkmark-circle'
+      }
+    />
+  ),
+};
+
+//Request Tab
+const RequestStack = createStackNavigator({
+    RequestScreen: {
+      screen: RequestScreen,
+    },
+ }
+)
+RequestStack.navigationOptions = {
+  tabBarLabel: 'Request',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-checkmark-circle${focused ? '' : '-outline'}`
+          : 'md-checkmark-circle'
       }
     />
   ),
@@ -78,9 +123,9 @@ AccountStack.navigationOptions = {
     <TabBarIcon
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-checkmark-circle${focused ? '' : '-outline'}`
-          : 'md-checkmark-circle'
+       Platform.OS === 'ios'
+          ? 'ios-settings'
+          : 'md-settings'
       }
     />
   ),
@@ -89,7 +134,9 @@ AccountStack.navigationOptions = {
 //TabNavigator
 const TabNavigator = createBottomTabNavigator({
     InvnetoryStack,
-    ResultStack,
+    OfferStack,
+    RequestStack,
+    NotifyStack,
     AccountStack
 })
 
