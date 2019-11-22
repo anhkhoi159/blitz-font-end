@@ -73,7 +73,13 @@ const OfferStack = createStackNavigator({
     OfferScreen: {
       screen: OfferScreen,
     },
- }
+ }, 
+ {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+  }
 )
 OfferStack.navigationOptions = {
   tabBarLabel: 'Offer',
@@ -133,8 +139,9 @@ AccountStack.navigationOptions = {
 
 //TabNavigator
 const TabNavigator = createBottomTabNavigator({
-    InvnetoryStack,
-    OfferStack,
+  OfferStack,  
+  InvnetoryStack,
+    
     RequestStack,
     NotifyStack,
     AccountStack
