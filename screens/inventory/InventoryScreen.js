@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList,Dimensions } from 'react-native';
 import InventoryItem from '../../components/InventoryItem'
 import { TODOS } from '../../data/data'
-import { NavigationActions } from 'react-navigation';
+
 
 export default function InventoryScreen(props) {
     // console.log("todo",TODOS)

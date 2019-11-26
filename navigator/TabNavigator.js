@@ -10,7 +10,7 @@ import NotifyScreen from '../screens/notify/NotifyScreen'
 import AccountScreen from '../screens/account/AccountScreen'
 import OfferScreen from '../screens/offer/OfferScreen'
 import RequestScreen from '../screens/request/RequestScreen'
-
+import OfferDetail from '../screens/offer/OfferDetail'
 import TabBarIcon from '../components/TabBarIcon';
 import { StyleSheet,Platform } from 'react-native';
 
@@ -70,6 +70,9 @@ NotifyStack.navigationOptions = {
 
 //Offer Tab
 const OfferStack = createStackNavigator({
+  OfferDetail: {
+    screen: OfferDetail,
+  },  
     OfferScreen: {
       screen: OfferScreen,
     },
@@ -97,9 +100,11 @@ OfferStack.navigationOptions = {
 
 //Request Tab
 const RequestStack = createStackNavigator({
-    RequestScreen: {
+  
+  RequestScreen: {
       screen: RequestScreen,
     },
+    
  }
 )
 RequestStack.navigationOptions = {

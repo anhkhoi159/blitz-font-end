@@ -27,7 +27,7 @@ export default function OfferScreen() {
     if(newOffer!=offer){
       setOffer(newOffer)
     }
-    getData()
+    // getData()
   }
 
     return (
