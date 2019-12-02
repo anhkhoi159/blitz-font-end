@@ -20,17 +20,31 @@ export default function LoginScreen(props) {
 
   
 
-    onNavigationStateChange =  (navState) => {
+    onNavigationStateChange =  async (navState) => {
       let successUrl = decodeURIComponent(navState.url)
       if(successUrl.indexOf(urlLogin+'ok/?token')=== 0){
         successUrl = (successUrl.replace('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/ok/?token=', '')).replace(/\'/g, '"');
         
       
         console.log("token ",JSON.parse(successUrl).access_token)
-        AsyncStorage.setItem('my_token', JSON.parse(successUrl).access_token, () => {
-          
+        var token = JSON.parse(successUrl).access_token
+        AsyncStorage.setItem('my_token', token , async () => {
+
         }
       )
+      const response = await fetch('https://apis.haravan.com/com/shop.json', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          Authorization: 'Bearer ' + token ,
+          
+        }),
+      });
+      const jsonData = await response.json();
+      console.log("mydata: ",JSON.parse(jsonData))
       AsyncStorage.setItem('is_login', 'true')
       props.navigation.navigate('InventoryScreen');
       // setShowWvLogin(false)

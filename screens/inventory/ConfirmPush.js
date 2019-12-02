@@ -48,14 +48,14 @@ const OKButton = props =>(
    />
  )
 
-export default function ConfirmScreen(props) {
+export default function ConfirmPush(props) {
 
   const okPress =(()=>{
     alert('Push flash sale successful !')
     props.navigation.navigate('InventoryScreen');
   })
   const cancelPress =(()=>{
-    props.navigation.navigate('RecommendScreen');
+    props.navigation.navigate('PushScreen');
   })
 
     return (

@@ -4,8 +4,8 @@ import { createAppContainer } from'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 // import { createBottomTabNavigator } from 'react-navigation-tabs'
 import InventoryScreen from '../screens/inventory/InventoryScreen'
-import RecommendScreen from '../screens/inventory/RecommendScreen'
-import ConfirmScreen from '../screens/inventory/ConfirmScreen'
+import ProductScreen from '../screens/inventory/ProductScreen'
+import PushProduct from '../screens/inventory/PushProduct'
 import NotifyScreen from '../screens/notify/NotifyScreen'
 import AccountScreen from '../screens/account/AccountScreen'
 import OfferScreen from '../screens/offer/OfferScreen'
@@ -16,16 +16,16 @@ import { StyleSheet,Platform } from 'react-native';
 
 //Inventory Tab
 const InvnetoryStack = createStackNavigator({
-    InventoryScreen: {
-      screen: InventoryScreen,  
-    },
-    RecommendScreen : {
-      screen:RecommendScreen
-    },
-    ConfirmScreen:{
-      screen:ConfirmScreen
-    }  
+  InventoryScreen: {
+    screen: InventoryScreen,  
   },
+  ProductScreen : {
+    screen:ProductScreen
+  },
+  PushProduct:{
+    screen:PushProduct
+  },  
+},
   {
   headerMode: 'none',
   navigationOptions: {
@@ -144,8 +144,9 @@ AccountStack.navigationOptions = {
 
 //TabNavigator
 const TabNavigator = createBottomTabNavigator({
-  OfferStack,  
   InvnetoryStack,
+  OfferStack,  
+  
     
     RequestStack,
     NotifyStack,

@@ -3,11 +3,9 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions   } from 'r
 
 
 export default function InventoryItem(props) {
-    const item  = props.item
-    
-    console.log("inventory ",item.item.name)
+    const { item } = props.item
     const onPress = ()=>{
-      props.onPressId(item.item.id)
+      props.onPressId(item)
     }
     return (
       <TouchableOpacity
@@ -16,15 +14,15 @@ export default function InventoryItem(props) {
        >
         <View style={styles.inventoryItem}>
             <View style={styles.boderItem}>
-            <Image  style={styles.imageProduct} source={{uri : item.item.img_src}}/>
+            <Image  style={styles.imageProduct} source={{uri : item.img_src}}/>
             </View>
             <View style={styles.infoInventory}>
-              <Text style={styles.titleInventory}>{item.item.title}</Text>
-              <Text style={styles.priceInventory}>Price: {item.item.price} VNĐ</Text>
+              <Text style={styles.titleInventory}>{item.title}</Text>
+              <Text style={styles.priceInventory}>Price: {item.price} VNĐ</Text>
             </View>
             <View style={styles.infoQuantityInventory}>
               <Text style={styles.quantityInventory}>Quantity</Text>
-              <Text style={styles.quantityInventory}>{item.item.inventory_quantity}</Text>
+              <Text style={styles.quantityInventory}>{item.inventory_quantity}</Text>
             </View>
             
         </View>

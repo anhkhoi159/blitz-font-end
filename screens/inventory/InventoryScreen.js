@@ -2,29 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList,Dimensions } from 'react-native';
 import InventoryItem from '../../components/InventoryItem'
 import { TODOS } from '../../data/data'
-
-
+import Toolbar from '../../components/Toolbar'
+import SearchBar from '../../components/SearchBar'
 export default function InventoryScreen(props) {
     // console.log("todo",TODOS)
 
-    const onPressId = id=>{
-      console.log("Hello",id)
+    const onPressId = product=>{
+      console.log("Hello",product.id)
       // props.navigation.navigate('MainScreen', {}, NavigationActions.navigate({ routeName: 'RecommendScreen' }))
-      props.navigation.navigate('RecommendScreen');
+      props.navigation.navigate('ProductScreen', { product : product });
    
     }
     return (
       <View style={styles.container}>
-        {/* <InventoryItem onPressId={onPressId}/>
-        <InventoryItem onPressId={onPressId}/>
-        <InventoryItem onPressId={onPressId}/>
-        <InventoryItem onPressId={onPressId}/> */}
-        <View style={styles.toolBar}>
-          <Text style={styles.textToolBar}>
-            INVENTORY MANAGEMENT
-          </Text>
-        </View>
-        <View style={styles.optionBar}>
+        <Toolbar title={"Quản lý tồn kho"}/>
+        <SearchBar/>
+        {/* <View style={styles.optionBar}>
           <View style={{flexDirection:'row'}}>
             <Text>Request: 26</Text>
             <Text> | </Text>
@@ -34,7 +27,7 @@ export default function InventoryScreen(props) {
             <Text>Sort  </Text>
             <Text>Filter</Text>
           </View>
-        </View>
+        </View> */}
         <FlatList
         data={TODOS}
         renderItem={(item) => <InventoryItem item={item} onPressId={onPressId}/>}
