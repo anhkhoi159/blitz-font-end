@@ -16,15 +16,16 @@ import { StyleSheet,Platform } from 'react-native';
 
 //Inventory Tab
 const InvnetoryStack = createStackNavigator({
+  PushProduct:{
+    screen:PushProduct
+  },  
   InventoryScreen: {
     screen: InventoryScreen,  
   },
   ProductScreen : {
     screen:ProductScreen
   },
-  PushProduct:{
-    screen:PushProduct
-  },  
+ 
 },
   {
   headerMode: 'none',

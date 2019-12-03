@@ -26,8 +26,9 @@ export default function LoginScreen(props) {
         successUrl = (successUrl.replace('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/ok/?token=', '')).replace(/\'/g, '"');
         
       
-        console.log("token ",JSON.parse(successUrl).access_token)
+        
         var token = JSON.parse(successUrl).access_token
+        console.log("token ",token)
         AsyncStorage.setItem('my_token', token , async () => {
 
         }
