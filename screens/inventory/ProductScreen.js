@@ -46,7 +46,7 @@ export default function ProductScreen(props) {
   const [product,setProduct] = useState(state.params.product)
 
   const MoveToTab =(()=>{
-    console.log("product ",product)
+   
     props.navigation.navigate('PushProduct', { product : product });
   })
 

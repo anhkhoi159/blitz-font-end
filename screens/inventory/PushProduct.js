@@ -9,7 +9,9 @@ import {
   TouchableOpacity
  } from 'react-native';
  import Toolbar from '../../components/Toolbar'
- import Image from 'react-native-scalable-image';
+ import SettingItem from '../../components/push_components/SettingItem'
+ import ConfirmItem from '../../components/push_components/ConfirmItem'
+ import DoneItem from '../../components/push_components/DoneItem'
 
 
 
@@ -20,14 +22,7 @@ export default function PushProduct(props) {
   // const { state } = props.navigation;
   // const [product,setProduct] = useState(state.params.product)
   const [step,setStep] = useState('setting')
-  // const StepButton = (props)=>(
-  //   <TouchableOpacity
-  //     style={styles.stepButton}>
-  //     <View style={styles.stepView}>
-  //       <Text>{props.title}</Text>
-  //     </View>
-  //   </TouchableOpacity>
-  //   )
+
   const StepPress= action=>{
     setStep(action)
   }
@@ -36,7 +31,9 @@ export default function PushProduct(props) {
      
         <View style={styles.container}>
           <Toolbar title={'Đẩy hàng'}/>
-          <ScrollView>
+          <View style={{flex:1}}>
+          <ScrollView >
+            
             <View style={styles.stepView}>
               <TouchableOpacity
                 style={{position:'relative',left:35}}
@@ -75,23 +72,10 @@ export default function PushProduct(props) {
                 </View>
               </TouchableOpacity>
             </View>
-          
-
-            {/* <View style={styles.productView}>
-              <Image height={150} width={150}  source={{uri:product.img_src}}/>
-              <View style={styles.contentView}>
-                <Text style={styles.titleContent}>{product.title}</Text>
-                <View style={styles.infoView}>
-                  <Text style={styles.infoText}>Giá hiện tại:</Text>
-                  <Text style={styles.infoText}>{product.price} VNĐ</Text>
-                </View>
-                <View style={styles.infoView}>
-                  <Text style={styles.infoText}>Số lượng:</Text>
-                  <Text style={styles.infoText}>{product.inventory_quantity}</Text>
-                </View>
-              </View>
-            </View> */}
+            <DoneItem/>
+            
           </ScrollView>
+          </View>
         </View>
       
     );
@@ -101,33 +85,34 @@ export default function PushProduct(props) {
     container: {         
       flexDirection:'column',
       paddingBottom:50,
+      flex:1
      
     },
-    productView:{
-      flexDirection:'row',
-      marginHorizontal:15,
-      marginTop:15,
-    },
-    contentView:{
-      flex:1,
-      flexDirection:'column',
-      marginTop:10
-    },
-    titleContent:{
-      fontSize:16,
-      fontWeight:'bold',
-      marginBottom:10
-    },
-    infoView:{
-      flexDirection:'row',
-      justifyContent:'space-between',
-      marginTop:10,
+    // productView:{
+    //   flexDirection:'row',
+    //   marginHorizontal:15,
+    //   marginTop:15,
+    // },
+    // contentView:{
+    //   flex:1,
+    //   flexDirection:'column',
+    //   marginTop:10
+    // },
+    // titleContent:{
+    //   fontSize:16,
+    //   fontWeight:'bold',
+    //   marginBottom:10
+    // },
+    // infoView:{
+    //   flexDirection:'row',
+    //   justifyContent:'space-between',
+    //   marginTop:10,
       
-    },
-    infoText:{
-      fontWeight:'500',
-      fontSize:14
-    },
+    // },
+    // infoText:{
+    //   fontWeight:'500',
+    //   fontSize:14
+    // },
     stepView:{
       flexDirection:'row-reverse',
       justifyContent:'center',
