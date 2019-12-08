@@ -4,12 +4,12 @@ import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 
 
 export default function StepButton(props) {
-    const {title} = props
-    const onPress = () =>{
-        console.log("click ok "+title)
+    const {title,onPress} = props
+    const stepPress = () =>{
+        onPress()
     }  
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={stepPress}>
         <View style={styles.container}>
             <Text style={styles.textContent}>{title}</Text>
         </View>

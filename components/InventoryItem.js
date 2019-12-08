@@ -18,10 +18,10 @@ export default function InventoryItem(props) {
             </View>
             <View style={styles.infoInventory}>
               <Text style={styles.titleInventory}>{item.title}</Text>
-              <Text style={styles.priceInventory}>Price: {item.price} VNĐ</Text>
+              <Text style={styles.priceInventory}>Giá bán: {item.price} VNĐ</Text>
             </View>
             <View style={styles.infoQuantityInventory}>
-              <Text style={styles.quantityInventory}>Quantity</Text>
+              <Text style={styles.quantityInventory}>Số lượng</Text>
               <Text style={styles.quantityInventory}>{item.inventory_quantity}</Text>
             </View>
             

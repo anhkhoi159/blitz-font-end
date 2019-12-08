@@ -42,9 +42,8 @@ import Toolbar from '../../components/Toolbar'
 export default function ProductScreen(props) {
 
   const { state } = props.navigation;
-  const [myDate, setMyDate] = useState(new Date());
   const [product,setProduct] = useState(state.params.product)
-
+  const [myDate, setMyDate] = useState(new Date());
   const MoveToTab =(()=>{
    
     props.navigation.navigate('PushProduct', { product : product });
@@ -77,8 +76,8 @@ export default function ProductScreen(props) {
                   <Image height={300}  source={{uri:product.img_src}}/>
                 </View>
                 <Text style={styles.titleTextItem}>{product.title}</Text>
-                <Text style={styles.textPrice}>Price: {product.price} VND</Text>
-                <Text style={styles.textQuantity}>Quantity: {product.inventory_quantity} </Text>
+                <Text style={styles.textPrice}>Giá bán: {product.price} VNĐ</Text>
+                <Text style={styles.textQuantity}>Số lượng: {product.inventory_quantity} </Text>
                
               
 

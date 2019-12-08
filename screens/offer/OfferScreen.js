@@ -2,42 +2,37 @@ import React,{useState} from 'react';
 import { StyleSheet, Text, View, FlatList,Button,Alert, TouchableOpacity } from 'react-native';
 import { TODOS } from '../../data/data'
 import InventoryItem from '../../components/InventoryItem'
+import Toolbar from '../../components/Toolbar'
 
+export default function OfferScreen(props) {
+  // const [offer, setOffer] = useState(true);
 
-export default function OfferScreen() {
-  const [offer, setOffer] = useState(true);
-
-
-  const getData = async ()=>{
-    const response = await fetch('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/getdata')
-    const jsonData = await response.json();
-    console.log("mydata: ",JSON.parse(jsonData))
+  // const getData = async ()=>{
+    // const response = await fetch('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/getdata')
+    // const jsonData = await response.json();
+    // console.log("mydata: ",JSON.parse(jsonData))
 
     // response.then((data)=>{
     //   console.log("my Data ",data.json())
     // })
     // console.log("my Data ",response.json())
-  }
-  const onPressId = id=>{
-    console.log("Hello",id)
+  // }
+  const onPressId = product=>{
+    // console.log("Hello",id)
     // props.navigation.navigate('MainScreen', {}, NavigationActions.navigate({ routeName: 'RecommendScreen' }))
-    props.navigation.navigate('RecommendScreen');
+    props.navigation.navigate('OfferDetail', { product : product });
   }  
-  const onPressTab = newOffer =>{
-    if(newOffer!=offer){
-      setOffer(newOffer)
-    }
+  // const onPressTab = newOffer =>{
+  //   if(newOffer!=offer){
+  //     setOffer(newOffer)
+  //   }
     // getData()
-  }
+  // }
 
     return (
       <View style={styles.container}> 
-        <View style={styles.toolBar}>
-          <Text style={styles.textToolBar}>
-            MARKET
-          </Text>
-        </View>
-        <View style={{width:'100%', flexDirection:'row'}}>
+        <Toolbar title={'CHỢ ĐẦU MỐI'}/>
+        {/* <View style={{width:'100%', flexDirection:'row'}}>
         <View style={styles.optionBar}>
           <View style={styles.statusBar}>
               <Text style={styles.textStatusBar}>Inventory Status</Text>
@@ -64,7 +59,7 @@ export default function OfferScreen() {
               </TouchableOpacity>     
             </View>
         </View>    
-        </View>
+        </View> */}
         <FlatList
         data={TODOS}
         renderItem={(item) => <InventoryItem item={item} onPressId={onPressId}/>}

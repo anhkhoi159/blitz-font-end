@@ -1,19 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import RecommendItem from '../RecommendItem'
-
+import StepButton from '../StepButton'
 
 export default function DoneItem(props) {
+  const {mess,target,product,donePress,onPressTitle} = props
+  const finishPress=()=>{
+    donePress()
+  }
   return (
     <View style={styles.container}>
-        <Text style={styles.messText}>Sản phẩm đã được đưa lên chợ thành công</Text>
-        <Text style={styles.suggestText}>Gợi ý người mua</Text>
+        <Text style={styles.messText}>{mess}</Text>
+        <Text style={styles.suggestText}>{target}</Text>
         <View style={{flexDirection:"row"}}>
         <RecommendItem/>
         <RecommendItem/>
         <RecommendItem/>
         </View>
-       
+        <View style={styles.stepButton}>
+          <StepButton title={onPressTitle} onPress={finishPress} />
+        </View>
     </View>
   );
 }
@@ -38,6 +44,12 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginHorizontal:25,
     marginBottom:15
-  }   
+  },
+  stepButton:{
+    flex:1,
+    alignItems:'center' ,
+    marginTop:70,
+  
+  }     
 });
   

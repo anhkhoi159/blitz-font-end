@@ -1,26 +1,29 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import NumnerView from '../NumberView'
+import NumberView from '../NumberView'
 import TextView from '../TextView'
 import StepButton from '../StepButton'
 
 export default function SettingItem(props) {
-    // const { product,onPress} = props
-  const [price,setPrice] = useState('45000')
-  const [quantity,setQuantity] = useState('56')
+  const { product,onPress} = props
+  const [price,setPrice] = useState(product.price.toString())
+  const [quantity,setQuantity] = useState(product.inventory_quantity.toString())
+  const settingPress=()=>{
+    onPress(1,'confirm')
+  }
   return (
     <View style={styles.container}>
-        <Text style={styles.textTitle}>Dưa gang</Text>
+        <Text style={styles.textTitle}>{product.title}</Text>
         {/* <Text style={styles.textContent}>product.price VNĐ   Tồn kho: product.inventory_quantity</Text> */}
-        <Text style={styles.textContent}>50.000 VNĐ   Tồn kho:56</Text>
+        <Text style={styles.textContent}>{product.price} VNĐ   Tồn kho: {product.inventory_quantity}</Text>
         
-        <NumnerView title='Giá bán' value={price} vnd={true} setValue={setPrice}/>
-        <NumnerView title='Số lượng bán' value={quantity} vnd={false} setValue={setQuantity}/>
+        <NumberView title='Giá bán' value={price} vnd={true} setValue={setPrice} height={40}/>
+        <NumberView title='Số lượng bán' value={quantity} vnd={false} setValue={setQuantity} height={40}/>
         <TextView title='Thiết lập giá sỉ'/>
         <TextView title='Cách thức mua'/>
         <TextView title='Địa chỉ lấy hàng'/>
         <View style={styles.stepButton}>
-          <StepButton title='Tiếp theo'/>
+          <StepButton title='Tiếp theo' onPress={settingPress} />
         </View>
     </View>
   

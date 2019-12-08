@@ -4,10 +4,14 @@ import StepButton from '../StepButton'
 
 
 export default function ConfirmItem(props) {
+  const { product,onPress} = props
+  const confirmPress=()=>{
+    onPress(2,'done')
+  }
   return (
     <View style={styles.container}>
 
-        <Text style={styles.textTitle}>Dưa gang</Text>
+        <Text style={styles.textTitle}>{product.title}</Text>
 
         <View style={styles.viewContent}>
           <View style={styles.numberView}>
@@ -40,7 +44,7 @@ export default function ConfirmItem(props) {
           </View>
         </View>
         <View style={styles.stepButton}>
-          <StepButton title='Xác nhận và bán'/>
+          <StepButton title='Xác nhận và bán' onPress={confirmPress}/>
         </View>
     </View>
   );

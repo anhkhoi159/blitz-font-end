@@ -8,22 +8,28 @@ import ProductScreen from '../screens/inventory/ProductScreen'
 import PushProduct from '../screens/inventory/PushProduct'
 import NotifyScreen from '../screens/notify/NotifyScreen'
 import AccountScreen from '../screens/account/AccountScreen'
+import BuyOrderScreen from '../screens/account/BuyOrderScreen'
+import SellOrderScreen from '../screens/account/SellOrderScreen'
 import OfferScreen from '../screens/offer/OfferScreen'
 import RequestScreen from '../screens/request/RequestScreen'
 import OfferDetail from '../screens/offer/OfferDetail'
+import OfferConfirm from '../screens/offer/OfferConfirm'
+import OfferDone from '../screens/offer/OfferDone'
+
 import TabBarIcon from '../components/TabBarIcon';
 import { StyleSheet,Platform } from 'react-native';
 
 //Inventory Tab
 const InvnetoryStack = createStackNavigator({
-  PushProduct:{
-    screen:PushProduct
-  },  
+    
   InventoryScreen: {
     screen: InventoryScreen,  
   },
   ProductScreen : {
     screen:ProductScreen
+  },
+  PushProduct:{
+    screen:PushProduct
   },
  
 },
@@ -71,12 +77,20 @@ NotifyStack.navigationOptions = {
 
 //Offer Tab
 const OfferStack = createStackNavigator({
+  OfferScreen: {
+    screen: OfferScreen,
+  },
+  OfferDone:{
+    screen: OfferDone,
+  },
   OfferDetail: {
     screen: OfferDetail,
-  },  
-    OfferScreen: {
-      screen: OfferScreen,
-    },
+  },
+  OfferConfirm:{
+    screen: OfferConfirm,
+  },
+ 
+   
  }, 
  {
   headerMode: 'none',
@@ -124,10 +138,24 @@ RequestStack.navigationOptions = {
 
 //Account Tab
 const AccountStack = createStackNavigator({
-    AccountScreen: {
+   
+  AccountScreen: {
       screen: AccountScreen,
     },
- }
+    SellOrderScreen:{
+      screen:SellOrderScreen
+    },
+    BuyOrderScreen:{
+      screen:BuyOrderScreen
+    }, 
+    
+ }, 
+ {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+  }
 )
 AccountStack.navigationOptions = {
   tabBarLabel: 'Account',
@@ -145,13 +173,13 @@ AccountStack.navigationOptions = {
 
 //TabNavigator
 const TabNavigator = createBottomTabNavigator({
-  InvnetoryStack,
-  OfferStack,  
   
-    
+  AccountStack,
+    InvnetoryStack,
+    OfferStack, 
     RequestStack,
     NotifyStack,
-    AccountStack
+    
 })
 
 

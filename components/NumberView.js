@@ -4,13 +4,13 @@ import { StyleSheet, Text, View,TouchableOpacity,TextInput  } from 'react-native
 
 
 export default function NumnerView(props) {
-    const {title,value,setValue,vnd} = props
+    const {title,value,setValue,vnd, height} = props
     const onPress = value =>{
         setValue(value)
     }  
   return (
     
-        <View style={styles.container}>
+        <View style={[styles.container,{height:height}]}>
             <Text style={styles.textContent}>{title}:</Text>
             {/* <Text style={[styles.textContent,{width:100, textAlign:'center'}]}>{value}</Text> */}
             <View style={{flexDirection:'row'}}>
@@ -31,7 +31,6 @@ export default function NumnerView(props) {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        height:40,
         paddingHorizontal:20,
         flexDirection:'row',
         justifyContent:'space-between',
