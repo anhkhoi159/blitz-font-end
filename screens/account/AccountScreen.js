@@ -33,9 +33,7 @@ const topicsData=[
 export default function AccountScreen(props) {
   AsyncStorage.getItem('is_login', (err, result) => {
     console.log("Result ",result)
-        if(result==='true'){
-          props.navigation.navigate('InventoryScreen');
-        }else if(result==='false'){
+         if(result==='false'){
           props.navigation.navigate('LoginScreen');
         }
     }
@@ -47,8 +45,9 @@ export default function AccountScreen(props) {
     }
     const Logout = ()=>{
       AsyncStorage.setItem('is_login', 'false')
+
       // Alert.alert('Đăng xuất thành công!')
-      // props.navigation.navigate('Login');
+      props.navigation.navigate('Login');
     }
     return (
       <View style={styles.container}>

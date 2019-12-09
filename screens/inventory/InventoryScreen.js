@@ -1,15 +1,79 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList,Dimensions } from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { StyleSheet, Text, View, FlatList,Dimensions,AsyncStorage } from 'react-native';
 import InventoryItem from '../../components/InventoryItem'
 import { TODOS } from '../../data/data'
 import Toolbar from '../../components/Toolbar'
 import SearchBar from '../../components/SearchBar'
-export default function InventoryScreen(props) {
-    // console.log("todo",TODOS)
 
+async function asyncCall(){
+ 
+  const token = await AsyncStorage.getItem('my_token',async (err, result) => {
+    return result
+  }
+)
+
+
+const response = await  fetch('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/pull', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    },
+    body:JSON.stringify({
+    "token": token,
+    }),
+
+});
+const jsonData = await response.json();
+// JSON.parse(JSON.stringify(jsonData))
+console.log("data "+JSON.stringify(jsonData))
+ return jsonData
+
+// var obj = { name: "John", age: 30, city: "New York" };
+
+// var aa = JSON.stringify(obj)
+// console.log(aa)
+// return JSON.stringify(obj)
+}
+
+
+export default  function InventoryScreen(props) {
+    const [data,setData] = useState();
+ 
+  
+  
+    AsyncStorage.getItem('is_login', (err, result) => {
+      if(result==='false'){
+        props.navigation.navigate('LoginScreen');
+      }
+    }
+  )
+    const getData = async ()=>{
+      const token = await AsyncStorage.getItem('my_token',async (err, result) => {
+        return result
+        }
+      )
+
+    const response = await  fetch('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/pull', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          },
+          body:JSON.stringify({
+          "token": token,
+          }),
+
+      });
+      const jsonData = await response.json();
+      setData(jsonData.data)
+     
+  }
+
+  useEffect(() => {
+    getData();
+  }, [data]);
+ 
     const onPressId = product=>{
       console.log("Hello",product.id)
-      // props.navigation.navigate('MainScreen', {}, NavigationActions.navigate({ routeName: 'RecommendScreen' }))
       props.navigation.navigate('ProductScreen', { product : product });
    
     }
@@ -29,7 +93,7 @@ export default function InventoryScreen(props) {
           </View>
         </View> */}
         <FlatList
-        data={TODOS}
+        data={data}
         renderItem={(item) => <InventoryItem item={item} onPressId={onPressId}/>}
         keyExtractor={item => (item.id).toString()}
         style={{marginBottom:60}}

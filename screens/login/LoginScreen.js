@@ -6,13 +6,10 @@ import { WebView } from 'react-native-webview';
 
 export default function LoginScreen(props) {
     const urlLogin = 'http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/'
-
+    // AsyncStorage.setItem('is_login', 'false')
     AsyncStorage.getItem('is_login', (err, result) => {
-      
           if(result==='true'){
             props.navigation.navigate('InventoryScreen');
-          }else if(result==='false'){
-            props.navigation.navigate('LoginScreen');
           }
       }
     )
@@ -39,12 +36,30 @@ export default function LoginScreen(props) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': bearer,
-        },
-      });
-      const jsonData = await response.json();
-      console.log("mydata: ",JSON.stringify(jsonData.shop))
-      AsyncStorage.setItem('shop_id', jsonData.shop.id)
-      AsyncStorage.setItem('shop_name', jsonData.shop.name)  
+          },
+        });
+        const jsonData = await response.json();
+        // console.log("mydata: ",JSON.stringify(jsonData.shop))
+        AsyncStorage.setItem('shop_id', jsonData.shop.id.toString())
+        AsyncStorage.setItem('shop_name', jsonData.shop.name.toString())  
+
+
+        const sync = await fetch('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/sync', {
+        method: 'POST',
+         headers: {
+          'Content-Type': 'application/json',
+          },
+          body:JSON.stringify({
+          'token': token,
+          }),
+        });
+
+        props.navigation.navigate('InventoryScreen');
+        // console.log("sync: ",JSON.stringify(sync))
+        // const jsonDatasync = await sync.json();
+        // console.log("jsonDatasync: ",JSON.stringify(jsonDatasync))
+        // console.log("sync data: ",JSON.stringify(jsonDatasync.data))
+    
         
       }
    }
