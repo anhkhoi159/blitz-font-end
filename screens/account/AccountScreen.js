@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View,Image,ScrollView,FlatList,Alert } from 'react-native';
+import { StyleSheet, Text, View,Image,ScrollView,FlatList,Alert, AsyncStorage } from 'react-native';
 import ToolBar from '../../components/Toolbar'
 import TopicOrder from '../../components/profile_components/TopicOrder'
 import ProfileItem from '../../components/profile_components/ProfileItem'
@@ -31,12 +31,24 @@ const topicsData=[
 
 
 export default function AccountScreen(props) {
+  AsyncStorage.getItem('is_login', (err, result) => {
+    console.log("Result ",result)
+        if(result==='true'){
+          props.navigation.navigate('InventoryScreen');
+        }else if(result==='false'){
+          props.navigation.navigate('LoginScreen');
+        }
+    }
+  )
+
+
     const onPress= screen=>{
       props.navigation.navigate(screen);
     }
     const Logout = ()=>{
-      Alert.alert('Đăng xuất thành công!')
-      props.navigation.navigate('Login');
+      AsyncStorage.setItem('is_login', 'false')
+      // Alert.alert('Đăng xuất thành công!')
+      // props.navigation.navigate('Login');
     }
     return (
       <View style={styles.container}>

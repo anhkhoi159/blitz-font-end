@@ -173,12 +173,11 @@ AccountStack.navigationOptions = {
 
 //TabNavigator
 const TabNavigator = createBottomTabNavigator({
-  
-  AccountStack,
     InvnetoryStack,
     OfferStack, 
     RequestStack,
     NotifyStack,
+    AccountStack,
     
 })
 

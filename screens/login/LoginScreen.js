@@ -6,11 +6,13 @@ import { WebView } from 'react-native-webview';
 
 export default function LoginScreen(props) {
     const urlLogin = 'http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/'
-    AsyncStorage.setItem('is_login', 'false')
+
     AsyncStorage.getItem('is_login', (err, result) => {
-      console.log("Result ",result)
+      
           if(result==='true'){
             props.navigation.navigate('InventoryScreen');
+          }else if(result==='false'){
+            props.navigation.navigate('LoginScreen');
           }
       }
     )
@@ -25,32 +27,24 @@ export default function LoginScreen(props) {
       if(successUrl.indexOf(urlLogin+'ok/?token')=== 0){
         successUrl = (successUrl.replace('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/ok/?token=', '')).replace(/\'/g, '"');
         
-      
+        AsyncStorage.setItem('is_login', 'true')
         
         var token = JSON.parse(successUrl).access_token
         console.log("token ",token)
-        AsyncStorage.setItem('my_token', token , async () => {
-
-        }
-      )
-      const response = await fetch('https://apis.haravan.com/com/shop.json', {
-        method: 'POST',
+        AsyncStorage.setItem('my_token', token)
+        props.navigation.navigate('LoginScreen');
+        var bearer = 'Bearer ' + token;
+        const response = await fetch('https://apis.haravan.com/com/shop.json?fields=id,name', {
+        method: 'GET',
         headers: {
-          Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': bearer,
         },
-        body: JSON.stringify({
-          Authorization: 'Bearer ' + token ,
-          
-        }),
       });
       const jsonData = await response.json();
-      console.log("mydata: ",JSON.parse(jsonData))
-      AsyncStorage.setItem('is_login', 'true')
-      props.navigation.navigate('InventoryScreen');
-      // setShowWvLogin(false)
-      // setIsLogin(true)
-        
+      console.log("mydata: ",JSON.stringify(jsonData.shop))
+      AsyncStorage.setItem('shop_id', jsonData.shop.id)
+      AsyncStorage.setItem('shop_name', jsonData.shop.name)  
         
       }
    }
@@ -59,7 +53,7 @@ export default function LoginScreen(props) {
   
 
     if(showWvLogin){
-      console.log("show webview")
+     
       return(<WebView 
         source={{ uri: urlLogin+'auth' }} 
         style={{  marginTop:20}}   
