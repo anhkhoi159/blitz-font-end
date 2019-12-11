@@ -6,7 +6,8 @@ import {
   Dimensions,
   ScrollView,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  
  } from 'react-native';
  import Toolbar from '../../components/Toolbar'
  import SettingItem from '../../components/push_components/SettingItem'
@@ -23,6 +24,7 @@ export default function PushProduct(props) {
   const [product,setProduct] = useState(state.params.product)
   const [step,setStep] = useState('setting')
   const [numberStep,setNumberStep]= useState(0)
+  const [myopacity,setOpacity]= useState(1)
   const mess ='Sản phẩm đã được đưa lên chợ thành công' 
   let content;
   const StepPress= action=>{
@@ -39,10 +41,10 @@ export default function PushProduct(props) {
   const DonePress = ()=>{
     props.navigation.navigate('InventoryScreen');
   }
-  console.log("product "+JSON.stringify(product))
+
   switch(step){
     case 'setting':
-      content = <SettingItem onPress={CheckStep} product={product}/>
+      content = <SettingItem onPress={CheckStep} product={product} setOpacity={setOpacity}/>
       break
     case 'confirm':
         content = <ConfirmItem onPress={CheckStep} product={product}/>
@@ -54,7 +56,7 @@ export default function PushProduct(props) {
 
     return (
      
-        <View style={styles.container}>
+        <View style={[styles.container,{opacity:myopacity}]}>
           <Toolbar title={'Đẩy hàng'}/>
           <View style={{flex:1}}>
           <ScrollView>

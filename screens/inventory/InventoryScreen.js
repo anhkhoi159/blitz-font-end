@@ -70,10 +70,9 @@ export default  function InventoryScreen(props) {
 
   useEffect(() => {
     getData();
-  }, [data]);
+  },);
  
     const onPressId = product=>{
-      console.log("Hello",product.id)
       props.navigation.navigate('ProductScreen', { product : product });
    
     }

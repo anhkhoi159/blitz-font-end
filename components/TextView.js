@@ -4,9 +4,9 @@ import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 
 
 export default function TextView(props) {
-    const {title} = props
+    const {title, press} = props
     const onPress = () =>{
-        console.log("click ok "+title)
+        press()
     }  
   return (
     <TouchableOpacity onPress={onPress}>

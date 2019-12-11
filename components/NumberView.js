@@ -5,7 +5,9 @@ import { StyleSheet, Text, View,TouchableOpacity,TextInput  } from 'react-native
 
 export default function NumnerView(props) {
     const {title,value,setValue,vnd, height} = props
+    parseInt() 
     const onPress = value =>{
+        if(value)
         setValue(value)
     }  
   return (

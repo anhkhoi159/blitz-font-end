@@ -2,19 +2,24 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-
-export default function ResultTwoValue(props) {
-    const {title,value} = props
-
+export default function ButtonTwoValue(props) {
+    const {title,value,press} = props
+    const onPress = ()=>{
+        if(press()!=undefined){
+            press()
+        }
+    }
     return (
       <View>
         {
           value!=""
-          ?<View style={styles.numberView}>
+          ?<TouchableOpacity onPress={onPress}>
+            <View style={styles.numberView}>
               <Text style={styles.titleContent}>{title}</Text>
               <Text style={styles.valueContent}>{value}</Text>
             </View>
-          :<TouchableOpacity>
+          </TouchableOpacity>
+          :<TouchableOpacity onPress={onPress}>
               <View style={[styles.numberView,{justifyContent:'center'}]}>
                 <Text style={styles.titleContent}>{title}</Text>
               </View>

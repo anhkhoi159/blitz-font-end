@@ -4,22 +4,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function ResultTwoValue(props) {
-    const {title,value} = props
+    const {title,address,phone} = props
 
     return (
       <View>
-        {
-          value!=""
-          ?<View style={styles.numberView}>
-              <Text style={styles.titleContent}>{title}</Text>
-              <Text style={styles.valueContent}>{value}</Text>
+        <View style={styles.numberView}>
+            <Text style={styles.titleContent}>{title}</Text>
+            <View>
+                <Text style={styles.valueContent}>{address}</Text>
+                <Text style={styles.valueContent}>{phone}</Text>
             </View>
-          :<TouchableOpacity>
-              <View style={[styles.numberView,{justifyContent:'center'}]}>
-                <Text style={styles.titleContent}>{title}</Text>
-              </View>
-            </TouchableOpacity>
-        }
+            
+        </View>
       </View>
         
     );
@@ -43,8 +39,9 @@ export default function ResultTwoValue(props) {
       },
       valueContent:{
         fontWeight:'bold',
-        fontSize:14,
+        fontSize:12,
         color:'white',
+        textAlign:'right'
       },
   });
   

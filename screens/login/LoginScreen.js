@@ -1,29 +1,45 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,AsyncStorage,ActivityIndicator  } from 'react-native';
 import GradientButton from 'react-native-gradient-buttons';
 import { NavigationActions } from 'react-navigation';
 import { WebView } from 'react-native-webview';
+
 
 export default function LoginScreen(props) {
     const urlLogin = 'http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/'
     // AsyncStorage.setItem('is_login', 'false')
     AsyncStorage.getItem('is_login', (err, result) => {
-          if(result==='true'){
+          if(result=='true'){
             props.navigation.navigate('InventoryScreen');
+            // return (
+            //   <View style={styles.loadingStyle}>
+            //     <ActivityIndicator size={'large'} />
+            //   </View>
+            // );
+            
+          }else if (result=='false'){
+            setLoading(false)
           }
       }
     )
-     const [isLogin,setIsLogin] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [isLogin,setIsLogin] = useState(false)
     const [showWvLogin,setShowWvLogin] = useState(false)
     
 
-  
+    if (loading) {
+      return (
+        <View style={styles.loadingStyle}>
+          <ActivityIndicator size={'large'}/>
+        </View>
+      );
+    }
 
     onNavigationStateChange =  async (navState) => {
       let successUrl = decodeURIComponent(navState.url)
       if(successUrl.indexOf(urlLogin+'ok/?token')=== 0){
         successUrl = (successUrl.replace('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/ok/?token=', '')).replace(/\'/g, '"');
-        
+        setLoading(true)
         AsyncStorage.setItem('is_login', 'true')
         
         var token = JSON.parse(successUrl).access_token
@@ -31,7 +47,7 @@ export default function LoginScreen(props) {
         AsyncStorage.setItem('my_token', token)
         props.navigation.navigate('LoginScreen');
         var bearer = 'Bearer ' + token;
-        const response = await fetch('https://apis.haravan.com/com/shop.json?fields=id,name', {
+        const response = await fetch('https://apis.haravan.com/com/shop.json?fields=id,name,address1,phone', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -42,6 +58,7 @@ export default function LoginScreen(props) {
         // console.log("mydata: ",JSON.stringify(jsonData.shop))
         AsyncStorage.setItem('shop_id', jsonData.shop.id.toString())
         AsyncStorage.setItem('shop_name', jsonData.shop.name.toString())  
+        AsyncStorage.setItem('shop_address', jsonData.shop.address1.toString())
 
 
         const sync = await fetch('http://blitz-api-env.ap-southeast-1.elasticbeanstalk.com/sync', {
@@ -107,5 +124,10 @@ export default function LoginScreen(props) {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    loadingStyle:{
+      flex: 1,
+      justifyContent:'center',
+      alignItems:'center'
+    }
   });
   
